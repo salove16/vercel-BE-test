@@ -1,16 +1,17 @@
 const express = require('express');
+const cors = require('cors');
+const bodyParser = require('body-parser');
+const routes= require('./src/route')
 const app = express();
-const port = 5000; // You can use any port you prefer
+const PORT = process.env.PORT || 8080;
 
-app.get('/', (req, res) => {
-    try {
-        res.send('Hello World!'); 
-    } catch (error) {
-        res.send(error)
-    }
-  
-});
+app.use(cors());
+app.use(bodyParser.json());
 
-app.listen(port, () => {
-  console.log(`Server is running on port ${port}`);
+
+
+app.use('/', routes);
+
+app.listen(PORT, () => {
+console.log(`Server Running on port: ${PORT}`);
 });
